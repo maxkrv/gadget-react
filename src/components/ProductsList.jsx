@@ -1,4 +1,5 @@
 import React from "react";
+import ProductItem from "./ProductItem";
 import Button from "./UI/Button/Button";
 
 const ProductsList = (props) => {
@@ -16,22 +17,11 @@ const ProductsList = (props) => {
 					</div>
 
 					<div className="products__wrapper">
-						{props.product.map((p, i) => (
-							<div key={i} className="product__item">
-								<img
-									src={p.image}
-									alt=""
-									className="product__img"
-								/>
-								<h2 className="product__title">{p.title}</h2>
-
-								<div className="product__footer">
-									<Button>Add to Cart</Button>
-									<span className="product__price">
-										${p.price}
-									</span>
-								</div>
-							</div>
+						{props.product.map((p) => (
+							<ProductItem
+								addToCart={props.addToCart}
+								product={p}
+							/>
 						))}
 					</div>
 				</div>

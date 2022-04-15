@@ -3,50 +3,43 @@
 		"id": 1,
 		"title": "Google Pixel 3 XL",
 		"price": 648,
-		"image": "./images/1.png",
-		"quantity": 1
+		"image": "./images/1.png"
 	},
 	{
 		"id": 2,
 		"title": "Google Pixel 2 XL",
 		"price": 500,
-		"image": "./images/2.png",
-		"quantity": 1
+		"image": "./images/2.png"
 	},
 	{
 		"id": 3,
 		"title": "Apple iPhone XR",
 		"price": 714,
-		"image": "./images/3.png",
-		"quantity": 1
+		"image": "./images/3.png"
 	},
 	{
 		"id": 4,
 		"title": "OnePlus 7 Pro",
 		"price": 327,
-		"image": "./images/4.png",
-		"quantity": 1
+		"image": "./images/4.png"
 	},
 	{
 		"id": 5,
 		"title": "Samsung Galaxy S10 Plus",
 		"price": 114,
-		"image": "./images/5.png",
-		"quantity": 1
+		"image": "./images/5.png"
 	},
 	{
 		"id": 6,
 		"title": "Samsung Galaxy Note 9",
 		"price": 170,
-		"image": "./images/6.png",
-		"quantity": 1
+		"image": "./images/6.png"
 	},
 	{
 		"id": 7,
 		"title": "Dell Alienware 17 R5 VR",
 		"price": 2300,
-		"image": "./images/7.png",
-		"quantity": 1
+		"image": "./images/7.png"
 	},
 	{
 		"id": 8,
@@ -58,21 +51,18 @@
 		"id": 9,
 		"title": "CHUWI HeroBook Pro 14.1",
 		"price": 439,
-		"image": "./images/9.png",
-		"quantity": 1
+		"image": "./images/9.png"
 	},
 	{
 		"id": 10,
 		"title": "Apple MacBook Air",
 		"price": 1150,
-		"image": "./images/10.png",
-		"quantity": 1
+		"image": "./images/10.png"
 	},
 	{
 		"id": 11,
 		"title": "Asus ROG Zephyrus S17 GX701LWS-HG110T",
 		"price": 3200,
-		"image": "./images/11.png",
-		"quantity": 1
+		"image": "./images/11.png"
 	}
 ]
