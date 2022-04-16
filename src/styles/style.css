@@ -238,3 +238,7 @@ body {
 	border: none;
 	cursor: pointer;
 }
+
+.arrow {
+	width: 15px;
+}

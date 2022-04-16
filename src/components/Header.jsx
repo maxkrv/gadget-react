@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import Modal from "./UI/Modal/Modal";
+import arrowUp from "../images/arrow-up.svg";
+import arrowDown from "../images/arrow-down.svg";
+import trash from "../images/trash.svg";
 
-const Header = () => {
+const Header = ({
+	getCartTotal,
+	cart,
+	clearCart,
+	getTotalSum,
+	removeFromCart,
+	addToCart,
+	cartDecrease
+}) => {
 	const [modal, setModal] = useState(false);
 
-	const list = JSON.parse(localStorage.getItem("cart-list")) || [];
 	return (
 		<header className="header">
 			<div className="container">
@@ -15,14 +25,17 @@ const Header = () => {
 
 					<div className="cart">
 						<span onClick={() => setModal(true)}>cart</span>
-						<div className="cart__counter">{list.length}</div>
+						<div className="cart__counter">{getCartTotal()}</div>
 						<Modal visible={modal} setVisible={setModal}>
 							<div className="modal">
 								<h2 className="modal__title">Your Cart</h2>
 
 								<div className="modal__product">
-									{list.map((l, i) => (
-										<div key={i} className="modal__product-item">
+									{cart.map((l, i) => (
+										<div
+											key={i}
+											className="modal__product-item"
+										>
 											<img
 												src={l.image}
 												alt=""
@@ -46,20 +59,25 @@ const Header = () => {
 											<div className="modal__buttons">
 												<div className="modal__buttons-wrapper">
 													<img
-														src="https://via.placeholder.com/10"
+														onClick={() => addToCart(l)}
+														src={arrowUp}
 														alt=""
 														className="arrow"
 													/>
-													<p>1</p>
+													<p>{l.quantity}</p>
 													<img
-														src="https://via.placeholder.com/10"
+														onClick={() => cartDecrease(l)}
+														src={arrowDown}
 														alt=""
 														className="arrow"
 													/>
 												</div>
 
 												<img
-													src="https://via.placeholder.com/10"
+													onClick={() => {
+														removeFromCart(l);
+													}}
+													src={trash}
 													alt=""
 													className="modal__delete"
 												/>
@@ -68,9 +86,12 @@ const Header = () => {
 									))}
 								</div>
 								<div className="modal__product-footer">
-									<p>Total: $ 5997</p>
+									<p>Total: $ {getTotalSum()}</p>
 
-									<button className="modal__product-button">
+									<button
+										onClick={clearCart}
+										className="modal__product-button"
+									>
 										Clear Cart
 									</button>
 								</div>

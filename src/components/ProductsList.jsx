@@ -17,8 +17,9 @@ const ProductsList = (props) => {
 					</div>
 
 					<div className="products__wrapper">
-						{props.product.map((p) => (
+						{props.product.map((p, i) => (
 							<ProductItem
+								key={i}
 								addToCart={props.addToCart}
 								product={p}
 							/>
