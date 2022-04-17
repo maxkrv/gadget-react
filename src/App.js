@@ -5,9 +5,7 @@ import "./styles/style.css";
 import products from "./products.json";
 import Footer from "./components/Footer";
 
-const cartFromLocalStorage = JSON.parse(
-	localStorage.getItem("cart-list") || "[]"
-);
+const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart-list") || "[]");
 
 function App() {
 	const [product, setProduct] = useState(products);
@@ -34,23 +32,17 @@ function App() {
 	};
 
 	const getTotalSum = () => {
-		return cart.reduce(
-			(sum, {price, quantity}) => sum + price * quantity,
-			0
-		);
+		return cart.reduce((sum, {price, quantity}) => sum + price * quantity, 0);
 	};
 
 	const addToCart = (productToAdd) => {
-		const isProductInCart = cart.find(
-			(currentProduct) => currentProduct.id === productToAdd.id
-		);
+		const isProductInCart = cart.find((currentProduct) => currentProduct.id === productToAdd.id);
 
 		if (isProductInCart) {
 			const updatedCart = cart.map((currentProduct) => {
 				if (currentProduct.id === productToAdd.id) {
 					return {
-						...currentProduct,
-						quantity: currentProduct.quantity + 1,
+						...currentProduct, quantity: currentProduct.quantity + 1,
 					};
 				}
 
@@ -68,52 +60,47 @@ function App() {
 	};
 
 	const cartDecrease = (productToDecrease) => {
-		const isProductInCart = cart.find(
-			(currentProduct) => currentProduct.id === productToDecrease.id
-		);
+		const isProductInCart = cart.find((currentProduct) => currentProduct.id === productToDecrease.id);
 
-		if (productToDecrease.quantity === 1) {
-			if (isProductInCart) {
-				console.log(12)
-				const updatedCart = cart.map((currentProduct) => {
-					if (currentProduct.id === productToDecrease.id) {
-						return {
-							...currentProduct,
-							quantity: currentProduct.quantity - 1,
-						};
-					}
+		const isMoreThanOne = cart.find((currentProduct) => currentProduct.quantity > 1);
 
-					return currentProduct;
-				});
 
-				setCart(updatedCart);
-			}
+		if (isProductInCart && isMoreThanOne) {
+			const updatedCart = cart.map((currentProduct) => {
+				if (currentProduct.id === productToDecrease.id) {
+					return {
+						...currentProduct, quantity: currentProduct.quantity - 1,
+					};
+				}
+
+				return currentProduct;
+			});
+
+			setCart(updatedCart);
 		} else {
-			console.log("stop");
+			removeFromCart(productToDecrease);
 		}
 	}
 
-	return (
-		<div className="App">
-			<Header
-				cart={cart}
-				setCart={setCart}
-				clearCart={clearCart}
-				getCartTotal={getCartTotal}
-				getTotalSum={getTotalSum}
-				removeFromCart={removeFromCart}
-				addToCart={addToCart}
-				cartDecrease={cartDecrease}
-			/>
-			<ProductsList
-				addToCart={addToCart}
-				sortByName={sortByName}
-				sortByPrice={sortByPrice}
-				product={product}
-			/>
-			<Footer/>
-		</div>
-	);
+	return (<div className="App">
+		<Header
+			cart={cart}
+			setCart={setCart}
+			clearCart={clearCart}
+			getCartTotal={getCartTotal}
+			getTotalSum={getTotalSum}
+			removeFromCart={removeFromCart}
+			addToCart={addToCart}
+			cartDecrease={cartDecrease}
+		/>
+		<ProductsList
+			addToCart={addToCart}
+			sortByName={sortByName}
+			sortByPrice={sortByPrice}
+			product={product}
+		/>
+		<Footer/>
+	</div>);
 }
 
 export default App;
