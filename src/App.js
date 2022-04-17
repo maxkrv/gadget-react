@@ -77,8 +77,6 @@ function App() {
 			});
 
 			setCart(updatedCart);
-		} else {
-			removeFromCart(productToDecrease);
 		}
 	}
 
