@@ -11,7 +11,7 @@ const Header = ({
 	getTotalSum,
 	removeFromCart,
 	addToCart,
-	cartDecrease
+	cartDecrease,
 }) => {
 	const [modal, setModal] = useState(false);
 
@@ -33,7 +33,7 @@ const Header = ({
 								<div className="modal__product">
 									{cart.map((l, i) => (
 										<div
-											key={i}
+											key={l.id}
 											className="modal__product-item"
 										>
 											<img
@@ -59,14 +59,21 @@ const Header = ({
 											<div className="modal__buttons">
 												<div className="modal__buttons-wrapper">
 													<img
-														onClick={() => addToCart(l)}
+														onClick={() => {
+
+															addToCart(l)
+														}}
 														src={arrowUp}
 														alt=""
 														className="arrow"
 													/>
 													<p>{l.quantity}</p>
 													<img
-														onClick={() => cartDecrease(l)}
+														onClick={() => {
+															if (l.quantity > 1) {
+																cartDecrease(l);
+															}
+														}}
 														src={arrowDown}
 														alt=""
 														className="arrow"

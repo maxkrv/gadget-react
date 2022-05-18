@@ -1,11 +1,13 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ProductsList from "./components/ProductsList";
 import "./styles/style.css";
 import products from "./products.json";
 import Footer from "./components/Footer";
 
-const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart-list") || "[]");
+const cartFromLocalStorage = JSON.parse(
+	localStorage.getItem("cart-list") || "[]"
+);
 
 function App() {
 	const [product, setProduct] = useState(products);
@@ -24,7 +26,7 @@ function App() {
 	};
 
 	const getCartTotal = () => {
-		return cart.reduce((sum, {quantity}) => sum + quantity, 0);
+		return cart.reduce((sum, { quantity }) => sum + quantity, 0);
 	};
 
 	const clearCart = () => {
@@ -32,17 +34,23 @@ function App() {
 	};
 
 	const getTotalSum = () => {
-		return cart.reduce((sum, {price, quantity}) => sum + price * quantity, 0);
+		return cart.reduce(
+			(sum, { price, quantity }) => sum + price * quantity,
+			0
+		);
 	};
 
 	const addToCart = (productToAdd) => {
-		const isProductInCart = cart.find((currentProduct) => currentProduct.id === productToAdd.id);
+		const isProductInCart = cart.find(
+			(currentProduct) => currentProduct.id === productToAdd.id
+		);
 
 		if (isProductInCart) {
 			const updatedCart = cart.map((currentProduct) => {
 				if (currentProduct.id === productToAdd.id) {
 					return {
-						...currentProduct, quantity: currentProduct.quantity + 1,
+						...currentProduct,
+						quantity: currentProduct.quantity + 1,
 					};
 				}
 
@@ -51,7 +59,7 @@ function App() {
 
 			setCart(updatedCart);
 		} else {
-			setCart([...cart, {...productToAdd, quantity: 1}]);
+			setCart([...cart, { ...productToAdd, quantity: 1 }]);
 		}
 	};
 
@@ -60,16 +68,17 @@ function App() {
 	};
 
 	const cartDecrease = (productToDecrease) => {
-		const isProductInCart = cart.find((currentProduct) => currentProduct.id === productToDecrease.id);
+		const isProductInCart = cart.find(
+			(currentProduct) => currentProduct.id === productToDecrease.id
+		);
 
-		const isMoreThanOne = cart.find((currentProduct) => currentProduct.quantity > 1);
 
-
-		if (isProductInCart && isMoreThanOne) {
+		if (isProductInCart) {
 			const updatedCart = cart.map((currentProduct) => {
 				if (currentProduct.id === productToDecrease.id) {
 					return {
-						...currentProduct, quantity: currentProduct.quantity - 1,
+						...currentProduct,
+						quantity: currentProduct.quantity - 1,
 					};
 				}
 
@@ -78,27 +87,29 @@ function App() {
 
 			setCart(updatedCart);
 		}
-	}
+	};
 
-	return (<div className="App">
-		<Header
-			cart={cart}
-			setCart={setCart}
-			clearCart={clearCart}
-			getCartTotal={getCartTotal}
-			getTotalSum={getTotalSum}
-			removeFromCart={removeFromCart}
-			addToCart={addToCart}
-			cartDecrease={cartDecrease}
-		/>
-		<ProductsList
-			addToCart={addToCart}
-			sortByName={sortByName}
-			sortByPrice={sortByPrice}
-			product={product}
-		/>
-		<Footer/>
-	</div>);
+	return (
+		<div className="App">
+			<Header
+				cart={cart}
+				setCart={setCart}
+				clearCart={clearCart}
+				getCartTotal={getCartTotal}
+				getTotalSum={getTotalSum}
+				removeFromCart={removeFromCart}
+				addToCart={addToCart}
+				cartDecrease={cartDecrease}
+			/>
+			<ProductsList
+				addToCart={addToCart}
+				sortByName={sortByName}
+				sortByPrice={sortByPrice}
+				product={product}
+			/>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
